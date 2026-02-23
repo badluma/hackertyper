@@ -65,7 +65,7 @@ Press any key to advance the output. Press `Ctrl+C` to exit.
 
 `black` `red` `green` `yellow` `blue` `magenta` `cyan` `white`
 
-`bright_black` `bright_red` `bright_green` `bright_yellow` `bright_blue` `bright_magenta` `bright_cyan` `bright_white`
+`light_black` `light_red` `light_green` `light_yellow` `light_blue` `light_magenta` `light_cyan` `light_white`
 
 ## Examples
 
@@ -77,7 +77,7 @@ hackertyper -p /path/to/file
 hackertyper -p /path/to/file -s 8 -c green -l
 
 # Slow, dramatic red output
-hackertyper -p /path/to/file 1 -c bright_red
+hackertyper -p /path/to/file -s 1 -c light_red
 ```
 
 ## License
