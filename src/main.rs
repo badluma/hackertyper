@@ -6,6 +6,8 @@ use functions::*;
 // Information for the --help argument
 #[derive(Parser, Debug)]
 #[command(
+    author = "badluma",
+    version = "1.0.0",
     name = "hackertyper",
     about = "A local, customizable CLI alternative for hackertyper.net"
 )]
@@ -20,13 +22,34 @@ struct Args {
     #[arg(short = 'p', long = "path")]
     path_arg: String,
 
-    /// Text Color
-    #[arg(short = 'c', long = "color")]
-    color_arg: Option<String>,
+    /// Choose log level
+    #[arg(short = 'c', long = "color", value_enum)]
+    color_arg: Option<Color>,
 
-    // Do Loop
+    /// Do Loop
     #[arg(short = 'l', long = "loop")]
     loop_arg: bool,
+}
+
+#[derive(clap::ValueEnum, Clone, Debug)]
+enum Color {
+    Black,
+    White,
+    Red,
+    Green,
+    Yellow,
+    Blue,
+    Magenta,
+    Cyan,
+    LightBlack,
+    LightWhite,
+    LightRed,
+    LightGreen,
+    LightYellow,
+    LightBlue,
+    LightMagenta,
+    LightCyan,
+    Default
 }
 
 fn main() {
@@ -42,10 +65,10 @@ fn main() {
 
     let path = args.path_arg;
 
-    let color: String = if let Some(color) = args.color_arg {
+    let color: Color = if let Some(color) = args.color_arg {
         color
     } else {
-        "default".to_string()
+        Color::Default
     };
 
     let loop_arg = args.loop_arg;
@@ -53,9 +76,15 @@ fn main() {
     let contents = std::fs::read_to_string(&path).expect("Failed to read file");
     let chars: Vec<char> = contents.chars().collect();
 
-    if loop_arg {
-        loop {
-            scan_and_flush(chars.clone(), Some(color.clone()), speed)
+    loop {
+        let return_code: u8 = scan_and_flush(chars.clone(), Some(color.clone()), speed);
+
+        if return_code == 1 {
+            break;
+        }
+
+        if !loop_arg {
+            break;
         }
     }
 }
