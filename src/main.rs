@@ -22,7 +22,7 @@ struct Args {
     #[arg(short = 'p', long = "path")]
     path_arg: String,
 
-    /// Choose log level
+    /// Choose color
     #[arg(short = 'c', long = "color", value_enum)]
     color_arg: Option<Color>,
 
