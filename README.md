@@ -1,35 +1,44 @@
-<img width="1000" height="262" alt="banner" src="https://github.com/user-attachments/assets/9dd2403e-26fb-48cf-aad5-68ea7cb3e7bf" />
+# hackertyper
 
-A local, customizable CLI alternative for [hackertyper.net](https://hackertyper.net). Type anything — output any file, character by character.
+A local, customizable CLI alternative for [hackertyper.net](https://hackertyper.net). Type anything and watch the output stream across your terminal character by character.
 
 ---
 
 ## Install
 
-**Platform:** Linux and macOS only. Windows is not supported (`termios` dependency).
-
 ### Prerequisites
 
-You need Rust and Cargo. If you don't have them, install via [rustup](https://rustup.rs):
+You need Rust and Cargo. If you don't have them, grab Rust from [rustup.rs](https://rustup.rs):
 
 ```bash
-# Linux / macOS
+# Linux / macOS / Windows Subsystem for Linux (WSL)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+or install them with brew:
+```bash
+brew install rust
+```
 
-This project requires **Rust 1.85 or later** (Cargo edition 2024). Verify your version:
+Make sure you're running **Rust 1.85 or later**. Check your version:
 
 ```bash
 rustc --version
 ```
 
-To update an existing installation:
-
+Update rust with:
 ```bash
 rustup update stable
 ```
 
-### Building from source
+### Quick Install (Recommended)
+
+```bash
+cargo install hackertyper
+```
+
+This grabs the latest crate from crates.io and installs it to `~/.cargo/bin/hackertyper`. Make sure `~/.cargo/bin` is on your `PATH` (rustup handles this automatically in most cases).
+
+### Build from Source
 
 ```bash
 git clone https://github.com/badluma/hackertyper
@@ -37,12 +46,15 @@ cd hackertyper
 cargo install --path .
 ```
 
-The binary is installed to `~/.cargo/bin/hackertyper`. Make sure `~/.cargo/bin` is on your `PATH` — rustup adds this automatically, but if it isn't:
+---
 
-```bash
-# Add to ~/.bashrc, ~/.zshrc, or equivalent
-export PATH="$HOME/.cargo/bin:$PATH"
-```
+## Platform Support
+
+**Linux & macOS:** Fully supported.
+
+**Windows:** Not directly supported due to the `termios` dependency. However, you can use **Windows Subsystem for Linux (WSL2)** to run hackertyper on Windows. Install WSL2, then follow the Linux installation steps above.
+
+---
 
 ## Usage
 
@@ -77,7 +89,7 @@ hackertyper -p /path/to/file
 hackertyper -p /path/to/file -s 8 -c green -l
 
 # Slow, dramatic red output
-hackertyper -p /path/to/file -s 1 -c light_red
+hackertyper -p /path/to/file -s 1 -c red
 ```
 
 ## License
