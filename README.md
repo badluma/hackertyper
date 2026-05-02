@@ -1,6 +1,8 @@
 # hackertyper
 
-A local, customizable CLI alternative for [hackertyper.net](https://hackertyper.net). Type anything and watch the output stream across your terminal character by character.
+A local CLI alternative to [hackertyper.net](https://hackertyper.net). Press any key and watch text stream across your terminal.
+
+![](demo.png)
 
 ---
 
@@ -8,35 +10,27 @@ A local, customizable CLI alternative for [hackertyper.net](https://hackertyper.
 
 ### Prerequisites
 
-You need Rust and Cargo. If you don't have them, grab Rust from [rustup.rs](https://rustup.rs):
+Rust 1.85+ is required (uses the 2024 edition). If you don't have it:
 
 ```bash
-# Linux / macOS / Windows Subsystem for Linux (WSL)
+# Linux / macOS / WSL
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
-or install them with brew:
+
 ```bash
+# macOS with Homebrew
 brew install rust
 ```
 
-Make sure you're running **Rust 1.85 or later**. Check your version:
+Check your version with `rustc --version`, update with `rustup update stable`.
 
-```bash
-rustc --version
-```
-
-Update rust with:
-```bash
-rustup update stable
-```
-
-### Quick Install (Recommended)
+### Quick Install
 
 ```bash
 cargo install hackertyper
 ```
 
-This grabs the latest crate from crates.io and installs it to `~/.cargo/bin/hackertyper`. Make sure `~/.cargo/bin` is on your `PATH` (rustup handles this automatically in most cases).
+Installs to `~/.cargo/bin/hackertyper`. Make sure that's on your `PATH` (rustup adds it automatically).
 
 ### Build from Source
 
@@ -52,7 +46,7 @@ cargo install --path .
 
 **Linux & macOS:** Fully supported.
 
-**Windows:** Not directly supported due to the `termios` dependency. However, you can use **Windows Subsystem for Linux (WSL2)** to run hackertyper on Windows. Install WSL2, then follow the Linux installation steps above.
+**Windows:** Not supported natively — `getch-rs` depends on `nix`, which is Unix-only. Use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) and follow the Linux steps above.
 
 ---
 
@@ -62,13 +56,13 @@ cargo install --path .
 hackertyper --path <file>
 ```
 
-Press any key to advance the output. Press `Ctrl+C` to exit.
+Press any key to advance. `Ctrl+C` to quit.
 
 ## Options
 
 | Flag | Short | Default | Description |
 |------|-------|---------|-------------|
-| `--path` | `-p` | required | Path to the file to type out |
+| `--path` | `-p` | required | File to type out |
 | `--speed` | `-s` | `4` | Characters printed per keypress |
 | `--color` | `-c` | `default` | Output color |
 | `--loop` | `-l` | `false` | Loop the file continuously |
@@ -82,13 +76,13 @@ Press any key to advance the output. Press `Ctrl+C` to exit.
 ## Examples
 
 ```bash
-# Type out a file at default speed
+# Default speed
 hackertyper -p /path/to/file
 
-# Faster output in green, looping
+# Fast, green, looping
 hackertyper -p /path/to/file -s 8 -c green -l
 
-# Slow, dramatic red output
+# Slow and dramatic
 hackertyper -p /path/to/file -s 1 -c red
 ```
 
